@@ -1,0 +1,6 @@
+**.DS_Store
+/.idea/
+
+# ---------  Additional .ignores  ---------- #
+auth.json
+/vendor
