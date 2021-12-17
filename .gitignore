@@ -3,4 +3,5 @@
 
 # ---------  Additional .ignores  ---------- #
 auth.json
+composer.lock
 /vendor
