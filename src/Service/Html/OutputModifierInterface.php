@@ -10,3 +10,21 @@
 declare(strict_types=1);
 
 namespace Iods\Performance\Service\Html;
+
+/**
+ * Interface OutputModifierInterface
+ * @package Iods\Performance\Service\Html
+ */
+interface OutputModifierInterface
+{
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool;
+
+    /**
+     * @param  $html
+     * @return string
+     */
+    public function modify($html): string;
+}

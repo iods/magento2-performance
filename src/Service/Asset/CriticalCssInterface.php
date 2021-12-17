@@ -11,6 +11,10 @@ declare(strict_types=1);
 
 namespace Iods\Performance\Service\Asset;
 
+/**
+ * Interface CriticalCssInterface
+ * @package Iods\Performance\Service\Asset
+ */
 interface CriticalCssInterface
 {
     const DEFAULT_CRITICAL_CSS_FILE = 'Iods_Performance::css/default.css';
@@ -22,7 +26,14 @@ interface CriticalCssInterface
      */
     public function getDefaultCriticalCss();
 
+    /**
+     * @return mixed
+     */
     public function getFontsCriticalCss();
 
+    /**
+     * @param  $bodyClass
+     * @return string
+     */
     public function getCriticalContent($bodyClass): string;
 }
