@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Core UI and SEO enhancements to improve Magento performance.
+ *
+ * @package   Iods_Performance
+ * @author    Rye Miller <rye@drkstr.dev>
+ * @copyright Copyright © 2021, Rye Miller (https://ryemiller.io)
+ * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="iods_global_scripts"
+                   template="Iods_Performance::js/global_scripts.phtml"
+                   before="-" />
+        </referenceBlock>
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="iods_global_css_rel_preload"
+                   template="Iods_Performance::js/css_rel_preload.phtml"
+                   after="-" />
+        </referenceContainer>
+    </body>
+</page>
