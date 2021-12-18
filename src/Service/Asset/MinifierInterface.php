@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Iods\Performance\Service\Asset;
 
-interface MinifyInterface
+interface MinifierInterface
 {
     // return the minified content
     public function minify($content): string;

@@ -52,6 +52,7 @@ class Data extends AbstractHelper
         return !!$this->getConfig('js/in_footer');
     }
 
+
     // return if the CSS was minified inline or not
     public function isMinifyInlineCss(): bool
     {
@@ -69,6 +70,7 @@ class Data extends AbstractHelper
     {
         return !!$this->getConfig('html/minify');
     }
+
 
     // return a list of all stylesheets moved to the footer
     public function listFooterCss(): array
@@ -88,5 +90,45 @@ class Data extends AbstractHelper
     public function isLazyLoadIframe(): bool
     {
         return $this->getConfig('html/lazy_load_iframe');
+    }
+
+
+
+    // sets the defer mode for CSS
+    public function getDeferCssMode()
+    {
+        return $this->getConfig('css/defer_mode');
+    }
+
+    // return a list of files to get
+    public function getDeferredFiles(): array
+    {
+        return array_map('trim', explode(',', $this->getConfig('css/defer_files')));
+    }
+
+
+
+    // return if preloading css is available
+    public function isServerPushCss(): bool
+    {
+        return !!$this->getConfig('css/server_push');
+    }
+
+    // return the files (css) pushed and preloaded
+    public function getServerPushedCss(): array
+    {
+        return array_map('trim', explode(',', $this->getConfig('css/server_push_files')));
+    }
+
+    // return if preloading js is available
+    public function isServerPushJs(): bool
+    {
+        return !!$this->getConfig('js/server_push');
+    }
+
+    // return the files (js) pushed and preloaded
+    public function getServerPushedJs(): array
+    {
+        return array_map('trim', explode(',', $this->getConfig('js/server_push_files')));
     }
 }
