@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Core UI and SEO enhancements to improve Magento performance.
+ *
+ * @package   Iods_Performance
+ * @author    Rye Miller <rye@drkstr.dev>
+ * @copyright Copyright © 2021, Rye Miller (https://ryemiller.io)
+ * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Magento\Framework\View\Page\Config\Renderer"
+                type="Iods\Performance\Block\View\Page\Config\Renderer" />
+
+    <type name="Magento\Framework\App\FrontControllerInterface">
+
+        <plugin name="iods_performance_frontend_controller_plugin"
+                type="Iods\Performance\Plugin\App\FrontendControllerPlugin"
+                sortOrder="1000" />
+    </type>
+
+    <type name="Magento\Framework\Controller\ResultInterface">
+
+        <plugin name="iods_performance_render_result_plugin"
+                type="Iods\Performance\Plugin\Controller\RenderResultPlugin"
+                sortOrder="100" />
+        <plugin name="iods_performance_result_page"
+                type="Iods\Performance\Plugin\View\Result\RenderPage"
+                sortOrder="10" />
+    </type>
+
+    <type name="Iods\Performance\Plugin\App\FrontendControllerPlugin">
+        <arguments>
+            <argument name="outputModifier" xsi:type="object">Iods\Performance\Model\Html\OutputModifier</argument>
+        </arguments>
+    </type>
+
+    <type name="Iods\Performance\Plugin\Controller\RenderResultPlugin">
+        <arguments>
+            <argument name="outputModifier" xsi:type="object">Iods\Performance\Model\Html\OutputModifier</argument>
+        </arguments>
+    </type>
+</config>
