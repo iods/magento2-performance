@@ -14,7 +14,7 @@ namespace Iods\Performance\Model\Model\Config\Source;
 use Iods\Performance\Service\Asset\DeferCssInterface;
 use Magento\Framework\Data\OptionSourceInterface;
 
-class DeferCssModel implements OptionSourceInterface
+class DeferCss implements OptionSourceInterface
 {
     public function toOptionArray(): array
     {
