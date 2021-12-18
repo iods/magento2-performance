@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Iods\Performance\Service\Asset;
 
+use Iods\Performance\Model\Html\Modifier\FooterCss;
+
 interface FooterCssInterface
 {
     // return the files moved to the footer
@@ -20,5 +22,5 @@ interface FooterCssInterface
     public function isMovable($fileId): bool;
 
     // register the file as a static asset
-    public function registerCssFile($fileId, $asset): FooterCssInterface;
+    public function registerCssFile($fileId, $asset): FooterCss;
 }

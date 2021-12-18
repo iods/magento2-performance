@@ -1,6 +1,6 @@
 <?php
 /**
- * Core UI and SEO enhancements to improve Magento performance.
+ * CWV and SEO enhancements to improve Magento performance.
  *
  * @package   Iods_Performance
  * @author    Rye Miller <rye@drkstr.dev>
@@ -23,8 +23,8 @@ interface OutputModifierInterface
     public function isEnabled(): bool;
 
     /**
-     * @param  $html
+     * @param string $html
      * @return string
      */
-    public function modify($html): string;
+    public function modify(string $html): string;
 }

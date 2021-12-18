@@ -31,7 +31,7 @@ interface PreloadInterface
     public function registerPlugin($headers): \Iterator;
 
     // Register a file to static
-    public function registerFile($url, $type): PreloadInterface;
+    public function registerFile($url, $type): array;
 
-    public function getSupportedTypes(): string;
+    public function getSupportedTypes(): array;
 }
