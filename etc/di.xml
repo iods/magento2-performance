@@ -1,8 +1,9 @@
+<?xml version="1.0"?>
 <!--
 /**
- * Description of a module goes here for Magento 2
+ * Core UI and SEO enhancements to improve Magento performance.
  *
- * @package   Iods_Bones
+ * @package   Iods_Performance
  * @author    Rye Miller <rye@drkstr.dev>
  * @copyright Copyright © 2021, Rye Miller (https://ryemiller.io)
  * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
@@ -11,10 +12,66 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <type name="Magento\Framework\Console\CommandListInterface">
+    <preference for="Iods\Performance\Service\Asset\CriticalCssInterface" type="Iods\Performance\Model\Asset\CriticalCss" />
+    <preference for="Iods\Performance\Service\Asset\PreloadInterface" type="Iods\Performance\Model\Asset\Preload" />
+    <preference for="Iods\Performance\Service\Asset\FooterCssInterface" type="Iods\Performance\Model\Html\Modifier\FooterCss" />
+    <preference for="Iods\Performance\Service\Asset\DeferCssInterface" type="Iods\Performance\Model\Asset\DeferCss" />
+
+    <virtualType name="HtmlMinifierAdapter" type="Iods\Performance\Model\Asset\Adapter\Html" />
+    <virtualType name="CssMinifierProcessor" type="Iods\Performance\Model\Asset\Minify">
         <arguments>
-            <argument name="commands" xsi:type="array">
-                <item name="iods_bones_command" xsi:type="object">Iods\Bones\Console\Command\SampleCommand</item>
+            <argument name="adapter" xsi:type="object">cssMinifierAdapter</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="JsMinifierProcessor" type="Iods\Performance\Model\Asset\Minify">
+        <arguments>
+            <argument name="adapter" xsi:type="object">jsMinifierAdapter</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="HtmlMinifierProcessor" type="Iods\Performance\Model\Asset\Minify">
+
+    </virtualType>
+    <virtualType name="Iods\Performance\Model\Logger\LoggerVirtualType" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">PerformanceLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="standard" xsi:type="object">IodsPerformanceLoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="IodsPerformanceLoggerHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/iods_performance.log</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Iods\Performance\Model\Html\Modifier\MinifyInlineCss">
+        <arguments>
+            <argument name="minifier" xsi:type="object">CssMinifierProcessor</argument>
+        </arguments>
+    </type>
+    <type name="Iods\Performance\Model\Html\Modifier\MinifyHtml">
+        <arguments>
+            <argument name="minifier" xsi:type="object">HtmlMinifierProcessor</argument>
+        </arguments>
+    </type>
+    <type name="Iods\Performance\Model\Html\Modifier\FooterJs">
+        <arguments>
+            <argument name="minifier" xsi:type="object">JsMinifierProcessor</argument>
+        </arguments>
+    </type>
+    <type name="Iods\Performance\Model\Html\OutputModifier">
+        <arguments>
+            <argument name="logger" xsi:type="object">Iods\Performance\Model\Logger\LoggerVirtualType</argument>
+            <argument name="isDebug" xsi:type="boolean">false</argument>
+            <argument name="modifiers" xsi:type="array">
+                <item name="FooterCss" xsi:type="object" sortOrder="10">Iods\Performance\Model\Html\Modifier\FooterCss</item>
+                <item name="FooterJs" xsi:type="object" sortOrder="20">Iods\Performance\Model\Html\Modifier\FooterJs</item>
+                <item name="ImageBackgrounds" xsi:type="object" sortOrder="0">Iods\Performance\Model\Html\Modifier\ImageBackgrounds</item>
+                <item name="LazyLoadIframes" xsi:type="object" sortOrder="30">Iods\Performance\Model\Html\Modifier\LazyLoadIframes</item>
+                <item name="LazyLoadImages" xsi:type="object" sortOrder="40">Iods\Performance\Model\Html\Modifier\LazyLoadImages</item>
+                <item name="MinifyHtml" xsi:type="object" sortOrder="60">Iods\Performance\Model\Html\Modifier\MinifyHtml</item>
+                <item name="MinifyInlineCss" xsi:type="object" sortOrder="50">Iods\Performance\Model\Html\Modifier\MinifyInlineCss</item>
             </argument>
         </arguments>
     </type>

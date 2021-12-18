@@ -9,10 +9,10 @@
  */
 declare(strict_types=1);
 
-use Magento\Framework\Component\ComponentRegistrar;
+namespace Iods\Performance\Service\Asset;
 
-ComponentRegistrar::register(
-    ComponentRegistrar::MODULE,
-    'Iods_Performance',
-    __DIR__
-);
+interface MinifierInterface
+{
+    // return the minified content
+    public function minify($content): string;
+}

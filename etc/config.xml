@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Core UI and SEO enhancements to improve Magento performance.
+ *
+ * @package   Iods_Performance
+ * @author    Rye Miller <rye@drkstr.dev>
+ * @copyright Copyright © 2021, Rye Miller (https://ryemiller.io)
+ * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+
+    <default>
+
+        <iods>
+            <!--
+
+            -->
+            <general>
+                <enable>1</enable>
+            </general>
+            <html>
+                <enable_minifier>0</enable_minifier>
+                <lazy_load_iframes>1</lazy_load_iframes>
+                <lazy_load_images>0</lazy_load_images>
+                <lazy_load_model>1</lazy_load_model>
+            </html>
+            <css>
+                <move_footer>0</move_footer>
+                <move_footer_files>
+                <![CDATA[
+                    css/styles-custom.css,
+                    mage/gallery/gallery.css,
+                    mage/calendar.css,
+                    FishPig_WordPress::css/wordpress.css
+                ]]>
+                </move_footer_files>
+                <minify_inline>0</minify_inline>
+                <defer_mode>0</defer_mode>
+                <defer_files>
+                    <![CDATA[css/styles-l.css]]>
+                </defer_files>
+                <server_push>1</server_push>
+                <server_push_files>
+                <![CDATA[
+                    css/styles-l.css,
+                    css/styles-m.css
+                ]]>
+                </server_push_files>
+            </css>
+            <js>
+                <move_footer>0</move_footer>
+                <minify_inline>0</minify_inline>
+                <server_push>0</server_push>
+            </js>
+        </iods>
+
+        <dev>
+            <html>
+                <minify_html>0</minify_html>
+            </html>
+            <css>
+                <minify_files>0</minify_files>
+                <merge_files>0</merge_files>
+            </css>
+            <js>
+                <minify_files>0</minify_files>
+                <merge_files>0</merge_files>
+            </js>
+        </dev>
+    </default>
+</config>

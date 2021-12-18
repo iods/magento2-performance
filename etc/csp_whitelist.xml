@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Core UI and SEO enhancements to improve Magento performance.
+ *
+ * @package   Iods_Performance
+ * @author    Rye Miller <rye@drkstr.dev>
+ * @copyright Copyright © 2021, Rye Miller (https://ryemiller.io)
+ * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
+
+    <policies>
+        <!-- policy id="script-src">
+            <values>
+                <value id="cloudflare-rocket" type="host">https://ajax.cloudflare.com</value>
+            </values>
+        </policy -->
+    </policies>
+</csp_whitelist>

@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Core UI and SEO enhancements to improve Magento performance.
+ *
+ * @package   Iods_Performance
+ * @author    Rye Miller <rye@drkstr.dev>
+ * @copyright Copyright © 2021, Rye Miller (https://ryemiller.io)
+ * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+
+    <system>
+
+        <tab id="iods" translate="label" sortOrder="1000">
+            <label>Performance (CWV and SEO)</label>
+        </tab>
+
+
+        <section id="iods" translate="label" type="text" sortOrder="470" showInDefault="1" showInWebsite="1">
+            <label>Output (HTML) Modifier</label>
+            <tab>iods</tab>
+            <resource>Magento_Config::advanced</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebSite="1">
+
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <labeL>Enable Modify HTML</labeL>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable the modification of HTML output.</comment>
+                </field>
+                <field id="debug" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Enable Debug Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Log site performance.</comment>
+                </field>
+            </group>
+
+            <group id="html" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebSite="1">
+
+                <label>HTML Processor</label>
+                <field id="enable_minify" translate="label" type="select" sortOrder="10"  showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Minify HTML</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="lazy_load_iframes" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Lazy Load Iframe</label>
+                    <source_model>Iods\Performance\Model\Model\Config\Source\LazyLoadModel</source_model>
+                </field>
+                <field id="lazy_load_images" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Lazy Load Images</label>
+                    <source_model>Iods\Performance\Model\Model\Config\Source\LazyLoadModel</source_model>
+                </field>
+            </group>
+
+            <group id="css" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebSite="1">
+
+                <label>Stylesheet Settings</label>
+                <field id="move_to_footer" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Move To Footer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Move to footer and merge moved files.</comment>
+                </field>
+                <field id="move_footer_files" translate="label" type="textarea" sortOrder="41" showInDefault="1" showInWebsite="1"  canRestore="1">
+                    <label>List of files</label>
+                    <comment><![CDATA[
+                        Move those files to footer (comma separated):
+                        css/styles-custom.css,
+                        mage/gallery/gallery.css,
+                        mage/calendar.css,
+                        FishPig_WordPress::css/wordpress.css
+                    ]]></comment>
+                    <depends>
+                        <field id="move_to_footer">1</field>
+                    </depends>
+                </field>
+                <field id="minify_inline" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Minify Inline</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Minify inline CSS.</comment>
+                </field>
+                <field id="defer_mode" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Enable Defer of CSS</label>
+                    <source_model>Iods\Performance\Model\Model\Config\Source\DeferCss</source_model>
+                    <comment>rel="preload" (default browser) will be removed by mod_pagespeed</comment>
+                </field>
+                <field id="defer_files" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1">
+                    <label>Defer by onload</label>
+                    <comment><![CDATA[
+                        Defer non-critical CSS (CSS only):
+                        css/styles-l.css
+                    ]]></comment>
+                    <depends>
+                        <field id="defer_mode" separator=",">1,2</field>
+                    </depends>
+                </field>
+                <field id="css_server_push" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>HTTP/2 Server Push CSS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable Server Push CSS. Varnish cache doesn't support this feature</comment>
+                </field>
+                <field id="server_push_files" translate="label" type="textarea" sortOrder="51" showInDefault="1" showInWebsite="1"  canRestore="1">
+                    <label>List of files</label>
+                    <comment><![CDATA[
+                        Add those files to HTTPS/2 push (comma separated):
+                        css/styles-l.css,
+                        css/styles-m.css
+                    ]]></comment>
+                    <depends>
+                        <field id="css_server_push">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="js" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebSite="1">
+
+                <label>JavaScript Settings</label>
+                <field id="minify_inline" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Minify Inline</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Minify inline JavaScript.</comment>
+                </field>
+                <field id="server_push" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>HTTP/2 Server Push JS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable Server Push JS. Varnish cache doesn't support this feature</comment>
+                </field>
+                <field id="server_push_files" translate="label" type="textarea" sortOrder="51" showInDefault="1" showInWebsite="1"  canRestore="1">
+                    <label>List of files</label>
+                    <comment><![CDATA[
+                        Add those files to HTTPS/2 push (comma separated):
+                        requirejs/require.js,
+                        js/file-2.js
+                    ]]></comment>
+                    <depends>
+                        <field id="server_push">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+        <!-- section id="developer" translate="label" type="text" sortOrder="920" showInDefault="1" showInWebsite="1">
+            <label>Developer Settings</label>
+            <tab>iods</tab>
+        </section -->
+    </system>
+</config>

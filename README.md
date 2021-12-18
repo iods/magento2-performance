@@ -1,27 +1,39 @@
-<h1 align="center">Magento 2 Bones</h1>
+<h1 align="center">Magento 2 Performance</h1>
+
+Core web vitals and Search Engine Optimization enhancements to improve Magento store performance.
+
 
 ### Description
 
-A starter project for beginning module development in Magento 2. Also a template for future Magento 2 projects.
+With the recent RAGE around PWA, lets make some default enhancements to ensure those not drinking the kool 
+aid are also improving their store's performance. This module uses Googles CWV insights and custom SEO 
+improvements to offer a better experience.
 
-Setting up the default files required by Magento 2 when building a custom module decreases development time
-and maintains consistency across projects.
 
 Facts
 -----
 
- * Version: 1.2.1
- * [Repository on Github](https://github.com/iods/magento2-bones)
+ * Version: 0.1.1
+ * [Repository on Github](https://github.com/iods/magento2-performance)
 
 
 Getting Started
 ---------------
-Instructions on how to download, install, and configure the module. 
+
+#### Download Zip
+
+Download a release.
+
+#### Through Composer
+
+Working on this.
+
 
 ### Requirements
 
  * [Git](http://git-scm.com)
  * [Composer](http://getcomposer.org)
+ * [Magento <= 2.4]()
  
 ### Known Issues
 
@@ -43,11 +55,19 @@ If you use your module internally, try to add links to related documentation cov
 ### Installation
 
 Includes a series of step-by-step examples for installation and configuration.
+
 ```
-$ composer require iods/module-bones
-$ bin/magento module:enable Iods_Bones
+$ composer require iods/module-performance
+$ bin/magento module:enable Iods_Performance
 $ bin/magento setup:upgrade
 $ bin/magento cache:flush 
+
+$ bin/magento config:set dev/js/minify_files 1 -l
+$ bin/magento config:set dev/js/merge_files 1 -l
+$ bin/magento config:set dev/css/minify_files 1 -l
+$ bin/magento config:set dev/css/merge_css_files 0 -l
+$ bin/magento config:set dev/template/minify_html 1 -l
+$ bin/magento deploy:mode:set production
 ```
 
 ## Deployment
@@ -66,6 +86,15 @@ Add additional notes about how to deploy this on a live system
 
 Explain how you made you module. Did you make use of Plugins or Observers? Where is the entry point of the module.
 
+ * Minify HTML code
+ * Lazy load Iframes, Images
+ * Defer/preload CSS files by using javascript/browser preload
+ * Minify inline CSS, Javascript
+ * Move javascript to footer
+ * Defer javascript codes
+ * Adding https/2 push
+ * Preload fonts
+
 ### Extensions
 
 Explain how to extend your module.
@@ -77,6 +106,8 @@ Give an example
 ### Configurations
 
 Give an overview of the given configurations.
+
+You have to disable merge css if you want to use CSS modifier functions.
 
 | Section | Group | Field | Description | 
 | ------ | ----- | ----- | ----------- |
@@ -162,7 +193,7 @@ Developer
 
  * **Rye Miller** - *Initial work* - [GitHub](http://github.com/iods/), [Homepage](https://ryemiller.io)
 
-See also the list of [contributors](https://github.com/iods/magento2-bones/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/iods/magento2-performance/contributors) who participated in this project.
 
 
 Versioning	

@@ -9,10 +9,19 @@
  */
 declare(strict_types=1);
 
-use Magento\Framework\Component\ComponentRegistrar;
+namespace Iods\Performance\Plugin\View\Result;
 
-ComponentRegistrar::register(
-    ComponentRegistrar::MODULE,
-    'Iods_Performance',
-    __DIR__
-);
+/**
+ * Class RenderPage for returning the optimized view.
+ * @package Iods\Performance\Plugin\View\Result
+ */
+class RenderPage
+{
+    protected $_assetService;
+
+    public function __construct(
+
+    ) {
+
+    }
+}
