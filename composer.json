@@ -1,6 +1,6 @@
 {
 	"name": "iods/module-performance",
-	"description": "Core UI and SEO enhancements to improve Magento performance.",
+	"description": "Core web vitals and Search Engine Optimization enhancements to improve Magento store performance.",
 	"type": "magento2-module",
 	"version": "0.1.0",
 	"homepage": "https://ryemiller.io",
@@ -10,7 +10,9 @@
 	"authors": [
 		{
 			"name": "Rye Miller",
-			"email": "rye@drkstr.dev"
+			"email": "rye@drkstr.dev",
+			"role": "Developer",
+			"homepage": "https://ryemiller.io"
 		}
 	],
 	"minimum-stability": "dev",
@@ -21,15 +23,16 @@
 		}
 	},
 	"require": {
-		"php": ">=7.4",
-		"magento/framework": ">=103",
+		"php": "~8.2.0|~8.1.0|~8.0.0|~7.4.0|~7.3.0",
+		"magento/framework": "^103.0",
 		"symfony/console": "*"
 	},
 	"require-dev": {
 		"phpstan/extension-installer": "^1.0",
 		"phpstan/phpstan": "^0.11",
 		"phpstan/phpstan-phpunit": "^0.11",
-		"phpunit/phpunit": "^9.0"
+		"phpunit/phpunit": "^9.0",
+		"composer/composer": "*@dev"
 	},
 	"autoload": {
 		"files": ["registration.php"],
@@ -49,5 +52,11 @@
 		],
 		"phpstan": "phpstan analyse",
 		"phpunit": "phpunit --no-coverage"
+	},
+	"config": {
+		"allow-plugins": {
+			"phpstan/extension-installer": true,
+			"magento/composer-dependency-version-audit-plugin": true
+		}
 	}
 }
